@@ -11,31 +11,29 @@ public class Main {
     }
 
     public static String appVersion(int numberOs, int yearRelease) {
+        int currentYear = LocalDate.now().getYear();
+        String os;
+        String version;
         if (numberOs == 0) {
-            int currentYear = LocalDate.now().getYear();
-            if (yearRelease < currentYear) {
-                return "Установите облегченную версию приложения для IOS";
-            } else {
-                return "Установите обычную версию приложения для IOS";
-            }
+            os = "IOS";
         } else {
-            int currentYear = LocalDate.now().getYear();
-            if (yearRelease < currentYear) {
-                return "Установите облегченную версию приложения для Android";
-            } else {
-                return "Установите обычную версию приложения для Android";
-            }
+            os = "Android";
         }
-
+        if (yearRelease == currentYear) {
+            version = "обычную";
+        } else {
+            version = "облегченную";
+        }
+        return "Установите " + version + " версию приложения для " + os + " по ссылке";
     }
 
     public static String deliveryBankCard(int deliveryDistance) {
         if (deliveryDistance < 20) {
-            return "Потребуется дней: " + 0;
-        } else if (deliveryDistance >= 20 && deliveryDistance <= 60) {
             return "Потребуется дней: " + 1;
-        } else if (deliveryDistance >= 60 && deliveryDistance <= 100) {
+        } else if (deliveryDistance >= 20 && deliveryDistance < 60) {
             return "Потребуется дней: " + 2;
+        } else if (deliveryDistance >= 60 && deliveryDistance <= 100) {
+            return "Потребуется дней: " + 3;
         } else {
             return "Доставки нет ";
         }
@@ -47,8 +45,7 @@ public class Main {
         int os = 1;
         int yearRelease = 2024;
         System.out.println(appVersion(os, yearRelease));
-        int deliveryDistance = 95;
+        int deliveryDistance = 60;
         System.out.println(deliveryBankCard(deliveryDistance));
     }
 }
-
